@@ -65,6 +65,19 @@ public class board {
 		return valid;
 	}
 	
+	public board checkIfValidChild(char piece, int i, int j, board childBoard)
+	{
+		boolean valid = false;
+		
+		if(theBoard[i][j] == ' ')
+			valid = changesToBoard(piece, i, j);
+		
+		if(valid)
+		;//TODO sumthing;
+		
+		return childBoard;
+	}
+	
 	public boolean changesToBoard(char piece, int i, int j)
 	{
 		//Move in all 8 directions until I hit a blank, out of bounds, or a piece 
