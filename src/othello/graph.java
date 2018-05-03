@@ -82,10 +82,10 @@ public class graph {
 				
 				for(i = 0; i < currNode.children.size(); ++i) {
 					
-					if(currNode.depth %2 == 1 && currNode.children.get(i).alpha < currNode.beta) {
+					if(currNode.depth %2 == 1 && currNode.children.get(i).alpha < currNode.beta && currNode.children.get(i).alpha != 0) {
 						currNode.beta = currNode.children.get(i).alpha;
 					}
-					else if(currNode.depth %2 == 0 && currNode.children.get(i).beta > currNode.alpha) {
+					else if(currNode.depth %2 == 0 && currNode.children.get(i).beta > currNode.alpha && currNode.children.get(i).beta != 100) {
 						currNode.alpha = currNode.children.get(i).beta;
 					}
 				
