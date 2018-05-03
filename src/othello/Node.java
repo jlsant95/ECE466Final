@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 public class Node
 {
-	private board curBoard;
-	private int alpha;
-	private int beta;
-	private int depth;
-	private ArrayList<Node> children;
-	private int hVal; //heuristic value
+	protected board curBoard;
+	protected int alpha;
+	protected int beta;
+	protected int depth;
+	protected ArrayList<Node> children;
+	protected int hVal; //heuristic value
+	protected Node parent;
+	protected boolean visited;
 
 	public Node () {
 		curBoard = new board();
@@ -18,6 +20,7 @@ public class Node
 		depth = 0;
 		children = new ArrayList<Node>();
 		hVal = -1;
+		visited = false;
 	}
 	
 	public Node(int daddy)
@@ -27,6 +30,7 @@ public class Node
 		depth = daddy + 1;
 		children = new ArrayList<Node>();
 		hVal = -1;
+		visited = false;
 		
 		if(depth == 3)
 		{
