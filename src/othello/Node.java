@@ -24,6 +24,7 @@ public class Node {
 	
 	public Node(int daddy)
 	{
+		curBoard = new board();
 		alpha = 0;
 		beta = 100;
 		depth = daddy + 1;
