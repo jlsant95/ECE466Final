@@ -2,8 +2,7 @@ package othello;
 
 import java.util.ArrayList;
 
-public class Node
-{
+public class Node {
 	protected board curBoard;
 	protected int alpha;
 	protected int beta;
@@ -36,6 +35,11 @@ public class Node
 		{
 			hVal = 0; //TODO count board for hVal of Nose
 		}
+	}
+	
+	public void addChild(Node child)
+	{
+		
 	}
 
 	public void calculateHeuristic(board current)

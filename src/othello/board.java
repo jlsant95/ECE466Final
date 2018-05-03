@@ -2,7 +2,7 @@ package othello;
 
 public class board {
 	
-	protected char theBoard[][];
+	char theBoard[][];
 	
 	public board()
 	{
@@ -63,6 +63,19 @@ public class board {
 			valid = changesToBoard(piece, i, j);
 		
 		return valid;
+	}
+	
+	public board checkIfValidChild(char piece, int i, int j, board childBoard)
+	{
+		boolean valid = false;
+		
+		if(theBoard[i][j] == ' ')
+			valid = changesToBoard(piece, i, j);
+		
+		if(valid)
+		;//TODO sumthing;
+		
+		return childBoard;
 	}
 	
 	public boolean changesToBoard(char piece, int i, int j)
