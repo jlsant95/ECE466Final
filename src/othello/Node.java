@@ -2,7 +2,6 @@ package othello;
 
 import java.util.ArrayList;
 
-
 public class Node {
 	protected board curBoard;
 	protected int alpha;
@@ -10,7 +9,8 @@ public class Node {
 	protected int depth;
 	protected ArrayList<Node> children;
 	protected int hVal; //heuristic value
-
+	protected Node parent;
+	protected boolean visited;
 
 	public Node () {
 		curBoard = new board();
@@ -19,6 +19,7 @@ public class Node {
 		depth = 0;
 		children = new ArrayList<Node>();
 		hVal = -1;
+		visited = false;
 	}
 	
 	public Node(int daddy)
@@ -28,6 +29,7 @@ public class Node {
 		depth = daddy + 1;
 		children = new ArrayList<Node>();
 		hVal = -1;
+		visited = false;
 		
 		if(depth == 3)
 		{
