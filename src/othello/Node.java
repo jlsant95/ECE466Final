@@ -61,7 +61,7 @@ public class Node {
 		}
 	}
 
-	public void calculateHeuristic(board current)
+	public void calculateHeuristic()
 	{
 		int count = 0;
 		

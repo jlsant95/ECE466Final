@@ -34,7 +34,7 @@ public class graph {
 			
 			if(currNode.depth == 3) {
 			
-				//currNode.calculateH
+				currNode.calculateHeuristic();
 				stack.pop();
 				
 				//update parent alpha
@@ -48,9 +48,9 @@ public class graph {
 			//need to add children nodes to stack
 			else if(currNode.children.size() == 0) {
 				
-				//currNode.createChildren();	
-				
+				currNode.addChildren();	
 				//add first child to stack as long as visited flag false
+				stack.push(currNode.children.get(0));
 				
 			}
 			else {
