@@ -51,6 +51,9 @@ public class board {
 		else
 		{
 			theBoard[i][j] = piece;
+			
+			printBoard();
+			
 			return true;
 		}
 	}
@@ -108,11 +111,14 @@ public class board {
 		
 		if(checkOmniDirection(verMove, horMove, i, j, piece))
 		{
-			while(curVerPos >= 1 && curVerPos < 7 && curHorPos >= 1 && curHorPos < 7)
+			do
 			{
 				
 				curVerPos += verMove;
 				curHorPos += horMove;
+				
+				if(curVerPos > 7 || curVerPos < 0 || curHorPos > 7 || curHorPos < 0)
+					return false;
 				
 				char curSpacePiece =  theBoard[curVerPos][curHorPos];
 				
@@ -124,6 +130,7 @@ public class board {
 					return true;
 				
 			}
+			while((curVerPos >= 0 && curVerPos < 8 && curHorPos >= 0 && curHorPos < 8));
 		}
 		
 		return false;
@@ -142,10 +149,13 @@ public class board {
 		else
 			oppoPiece = '*';
 		
-		while(curVerPos >= 1 && curVerPos < 7 && curHorPos >= 1 && curHorPos < 7)
+		do
 		{
 			curVerPos += verMove;
 			curHorPos += horMove;
+			
+			if(curVerPos > 7 || curVerPos < 0 || curHorPos > 7 || curHorPos < 0)
+				return false;
 			
 			char curSpacePiece =  theBoard[curVerPos][curHorPos];
 			
@@ -161,6 +171,7 @@ public class board {
 				break;
 				
 		}
+		while((curVerPos >= 0 && curVerPos < 8 && curHorPos >= 0 && curHorPos < 8));
 		
 		return true;
 	}
