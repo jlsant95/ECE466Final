@@ -70,7 +70,10 @@ public class board {
 		boolean valid = false;
 		
 		if(childBoard.getSpace(i, j) == ' ')
+		{
 			valid = childBoard.changesToBoard(piece, i, j);
+			childBoard.theBoard[i][j] = piece;
+		}
 		
 		if(!valid)
 			return null;
@@ -169,7 +172,8 @@ public class board {
 		{
 			for(int j = 0; j < 8; j++)
 			{
-				theBoard[i][j] = daddy.getSpace(i, j);
+				
+				theBoard[i][j] =  daddy.getSpace(i, j);
 			}
 		}
 		

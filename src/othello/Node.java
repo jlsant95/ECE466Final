@@ -47,12 +47,24 @@ public class Node {
 			for(int j = 0; j < 8; j++)
 			{
 				Node child = new Node(depth);
-				
+				char piece = 'o';
+				//System.out.println(i + " " + j);
 				child.curBoard.copyBoard(curBoard);
 				
-				if(curBoard.checkIfValidChild('o', i, j, child.curBoard) != null)
+				//child.curBoard.printBoard();
+				
+				if(depth % 2 == 1)
+					piece = '*';
+				
+				
+				if(curBoard.checkIfValidChild(piece, i, j, child.curBoard) != null)
 				{
-					child.curBoard = curBoard.checkIfValidChild('o', i, j, child.curBoard);
+//					System.out.println("Current depth: " + child.depth);
+//					System.out.println();
+//					child.curBoard.printBoard();
+//					System.out.println();
+					
+					
 					child.parent = this;
 					children.add(child);
 					

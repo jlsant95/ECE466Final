@@ -82,7 +82,11 @@ public class graph {
 
 			//go to next node depth-wise
 			//stack.pop();
-			currNode = stack.peek();
+			
+			if(stack.empty())
+				break;
+			else
+				currNode = stack.peek();
 					
 		}
 		
