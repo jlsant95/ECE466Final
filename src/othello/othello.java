@@ -61,13 +61,16 @@ public class othello {
 			graph currGraph = new graph(orig);
 			currGraph.alphaBetaSearch();
 			
-			System.out.println("Root alpha value: " + orig.alpha);
+			System.out.println(currGraph.minimaxCount);
+			System.out.println(currGraph.alphaBetaCount);
 			
-			for(i = 0; i < orig.children.size(); ++i)
-			{
-				System.out.println(orig.children.get(i).beta);
-			}
-			
+//			System.out.println("Root alpha value: " + orig.alpha);
+//			
+//			for(i = 0; i < orig.children.size(); ++i)
+//			{
+//				System.out.println(orig.children.get(i).beta);
+//			}
+//			
 			for(i = 0; i < orig.children.size(); ++i) {
 				if(orig.children.get(i).beta == orig.alpha) {
 					break;

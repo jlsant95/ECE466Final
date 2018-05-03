@@ -8,6 +8,8 @@ public class graph {
 	public ArrayList<Node> nodes;	//don't forget to allocate memory
 	public Stack<Node> stack;
 	public Node rootNode;
+	public int minimaxCount;
+	public int alphaBetaCount;
 	
 	public graph() {
 		nodes = new ArrayList<Node>();
@@ -19,6 +21,8 @@ public class graph {
 		rootNode = initial;
 		nodes.add(initial);
 		stack.push(initial);
+		minimaxCount = 0;
+		alphaBetaCount = 0;
 	}
 	
 	public int alphaBetaSearch() {
@@ -30,13 +34,19 @@ public class graph {
 		//depth first search
 		
 		while(stack.size() != 0) {
-			
-			currNode.visited = true;
+			if(currNode.visited == false) {
+				currNode.visited = true;
+				minimaxCount++;
+				if(currNode.pruned == false) {
+					alphaBetaCount++;
+				}
+				
+			}
 			
 			if(currNode.depth == 3) {
 			
 				currNode.calculateHeuristic();
-				System.out.println(currNode.hVal);
+				//System.out.println(currNode.hVal);
 				stack.pop();
 				
 				//update parent alpha
@@ -51,8 +61,13 @@ public class graph {
 			else if(currNode.children.size() == 0) {
 				
 				currNode.addChildren();	
+				
+				//TODO here check if size is 0
+				
 				//add first child to stack as long as visited flag false
 				stack.push(currNode.children.get(0));
+				
+				 
 				
 			}
 			else {
@@ -70,15 +85,6 @@ public class graph {
 				}
 				
 				//Need to update min/max values of parent
-//				if(currNode.parent != null ) {
-//					if(currNode.depth %2 == 1 && currNode.beta >= currNode.parent.alpha) {
-//						currNode.parent.alpha = currNode.beta;
-//					}
-//					else if(currNode.depth %2 == 0 && currNode.alpha <= currNode.parent.beta){
-//						currNode.parent.beta = currNode.alpha;
-//					}
-//					
-//				}
 				
 				for(i = 0; i < currNode.children.size(); ++i) {
 					
@@ -90,10 +96,17 @@ public class graph {
 					}
 				
 				}
-				
-
 			
+			//alpha beta pruning
+			if(currNode.parent != null ) {
+				if(currNode.depth %2 == 1 && currNode.beta <= currNode.parent.alpha) {
+					alphaBetaPrune(currNode);
+				}
+				else if(currNode.depth %2 == 0 && currNode.alpha >= currNode.parent.beta){
+					alphaBetaPrune(currNode);
+				}
 				
+			}
 				
 			}
 			
@@ -106,6 +119,28 @@ public class graph {
 		
 		
 		return 0;
+		
+		
+	}
+	
+	public void alphaBetaPrune(Node currNode) {
+		int i;
+		int j;
+		
+		for(i = 0; i < currNode.children.size(); ++i) {
+			
+			if(currNode.children.get(i).visited == false) {
+				currNode.children.get(i).pruned = true;
+				
+				for(j = 0; j < currNode.children.get(i).children.size(); ++j) {
+					currNode.children.get(i).children.get(j).pruned = true;
+				}
+				
+				
+			}
+			
+		}
+		
 		
 		
 	}

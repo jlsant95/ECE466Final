@@ -11,6 +11,7 @@ public class Node {
 	protected int hVal; //heuristic value
 	protected Node parent;
 	protected boolean visited;
+	protected boolean pruned;
 
 	public Node () {
 		curBoard = new board();
