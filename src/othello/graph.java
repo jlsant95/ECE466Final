@@ -36,7 +36,7 @@ public class graph {
 			if(currNode.depth == 3) {
 			
 				currNode.calculateHeuristic();
-				System.out.println(currNode.hVal);
+				//System.out.println(currNode.hVal);
 				stack.pop();
 				
 				//update parent alpha
