@@ -53,6 +53,8 @@ public class othello {
 			
 			if(white == false && black == false) {
 				System.out.println("Game ended");
+				System.out.println("There are" + orig.countBlack() + "black stones");
+				System.out.println("There are" + orig.countWhite() + "white stones");
 				break;
 				
 			}
@@ -77,10 +79,32 @@ public class othello {
 				}
 				
 			}
+			//check if any valid moves for AI
+			if(orig.children.size() == 0) {
+				white = false;
+			}
+			else {
+				white = true;
+			}
 			
-			orig.curBoard.copyBoard(orig.children.get(i).curBoard);
+			if(white == false && black == false) {
+				System.out.println("Game ended");
+				System.out.println("There are " + orig.countBlack() + " black stones");
+				System.out.println("There are " + orig.countWhite() + " white stones");
+				break;
+			}
+				
+			if(i != orig.children.size()) {
+				orig.curBoard.copyBoard(orig.children.get(i).curBoard);
+			}
+			else if(orig.children.size() != 0) {
+				orig.curBoard.copyBoard(orig.children.get(0).curBoard);
+			}
 			orig.alpha = 0;
 			
+
+			orig.children.clear();
+			orig.curBoard.printBoard();
 			
 //			orig.printBoard();
 			
@@ -101,24 +125,6 @@ public class othello {
 //				}
 //				
 //			}
-			
-			orig.children.clear();
-			
-			
-			orig.curBoard.printBoard();
-			
-			if(i == 3) {
-				white = false;
-			}
-			else {
-				white = true;
-			}
-			
-			if(white == false && black == false) {
-				System.out.println("Game ended");
-				break;
-				
-			}
 		
 		}
 		

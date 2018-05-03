@@ -63,11 +63,14 @@ public class graph {
 				currNode.addChildren();	
 				
 				//TODO here check if size is 0
-				
-				//add first child to stack as long as visited flag false
-				stack.push(currNode.children.get(0));
-				
-				 
+				if(currNode.children.size() != 0) {
+					//add first child to stack as long as visited flag false
+					stack.push(currNode.children.get(0));
+				}
+				else {
+					stack.pop();
+				}
+
 				
 			}
 			else {

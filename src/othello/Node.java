@@ -21,6 +21,7 @@ public class Node {
 		children = new ArrayList<Node>();
 		hVal = -1;
 		visited = false;
+		pruned = false;
 	}
 	
 	public Node(int daddy)
@@ -32,6 +33,7 @@ public class Node {
 		children = new ArrayList<Node>();
 		hVal = -1;
 		visited = false;
+		pruned = false;
 		
 		if(depth == 3)
 		{
@@ -91,6 +93,41 @@ public class Node {
 		}
 		
 		hVal = count;
+	}
+	
+	public int countBlack()
+	{
+		int count = 0;
+		
+		for(int rows = 0; rows < 8; rows++)
+		{
+			for(int cols = 0; cols < 8; cols++)
+			{
+				if(curBoard.theBoard[rows][cols] == '*')
+				{
+					count++;
+				}
+			}
+		}
+		
+		return count;
+	}
+	public int countWhite()
+	{
+		int count = 0;
+		
+		for(int rows = 0; rows < 8; rows++)
+		{
+			for(int cols = 0; cols < 8; cols++)
+			{
+				if(curBoard.theBoard[rows][cols] == 'o')
+				{
+					count++;
+				}
+			}
+		}
+		
+		return count;
 	}
 	
 }
