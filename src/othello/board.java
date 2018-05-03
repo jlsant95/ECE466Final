@@ -2,7 +2,7 @@ package othello;
 
 public class board {
 	
-	private char theBoard[][];
+	char theBoard[][];
 	
 	public board()
 	{

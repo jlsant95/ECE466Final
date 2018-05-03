@@ -2,7 +2,7 @@ package othello;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
+
 public class Node {
 	protected board curBoard;
 	protected int alpha;
@@ -10,16 +10,7 @@ public class Node {
 	protected int depth;
 	protected ArrayList<Node> children;
 	protected int hVal; //heuristic value
-=======
-public class Node
-{
-	private board curBoard;
-	private int alpha;
-	private int beta;
-	private int depth;
-	private ArrayList<Node> children;
-	private int hVal; //heuristic value
->>>>>>> 8cafa1fa36dd661861a62ac7c296e758916f177a
+
 
 	public Node () {
 		curBoard = new board();
