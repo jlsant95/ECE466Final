@@ -35,9 +35,19 @@ public class Node {
 		}
 	}
 	
-	public void addChild(Node child)
+	public void addChildren(Node parent)
 	{
 		
+		
+		for(int i = 0; i < 8; i++)
+		{
+			for(int j = 0; j < 8; j++)
+			{
+				if()
+				
+				
+			}
+		}
 	}
 
 	public void calculateHeuristic(board current)
