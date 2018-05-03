@@ -68,6 +68,16 @@ public class othello {
 				System.out.println(orig.children.get(i).beta);
 			}
 			
+			for(i = 0; i < orig.children.size(); ++i) {
+				if(orig.children.get(i).beta == orig.alpha) {
+					break;
+				}
+				
+			}
+			
+			orig.curBoard.copyBoard(orig.children.get(i).curBoard);
+			orig.alpha = 0;
+			
 			
 //			orig.printBoard();
 			

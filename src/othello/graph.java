@@ -22,6 +22,7 @@ public class graph {
 	}
 	
 	public int alphaBetaSearch() {
+		
 		int i = 0;
 		
 		Node currNode = stack.peek();
@@ -35,6 +36,7 @@ public class graph {
 			if(currNode.depth == 3) {
 			
 				currNode.calculateHeuristic();
+				System.out.println(currNode.hVal);
 				stack.pop();
 				
 				//update parent alpha
@@ -68,20 +70,32 @@ public class graph {
 				}
 				
 				//Need to update min/max values of parent
-				if(currNode.parent != null ) {
-					if(currNode.depth %2 == 1 && currNode.beta >= currNode.parent.alpha) {
-						currNode.parent.alpha = currNode.beta;
-					}
-					else if(currNode.depth %2 == 0 && currNode.alpha <= currNode.parent.beta){
-						currNode.parent.beta = currNode.alpha;
-					}
+//				if(currNode.parent != null ) {
+//					if(currNode.depth %2 == 1 && currNode.beta >= currNode.parent.alpha) {
+//						currNode.parent.alpha = currNode.beta;
+//					}
+//					else if(currNode.depth %2 == 0 && currNode.alpha <= currNode.parent.beta){
+//						currNode.parent.beta = currNode.alpha;
+//					}
+//					
+//				}
+				
+				for(i = 0; i < currNode.children.size(); ++i) {
 					
+					if(currNode.depth %2 == 1 && currNode.children.get(i).alpha < currNode.beta) {
+						currNode.beta = currNode.children.get(i).alpha;
+					}
+					else if(currNode.depth %2 == 0 && currNode.children.get(i).beta > currNode.alpha) {
+						currNode.alpha = currNode.children.get(i).beta;
+					}
+				
 				}
 				
-			}
 
-			//go to next node depth-wise
-			//stack.pop();
+			
+				
+				
+			}
 			
 			if(stack.empty())
 				break;
