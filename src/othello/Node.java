@@ -37,7 +37,7 @@ public class Node {
 		}
 	}
 	
-	public void addChildren(Node parent)
+	public void addChildren()
 	{
 		
 		
@@ -45,8 +45,17 @@ public class Node {
 		{
 			for(int j = 0; j < 8; j++)
 			{
-				if()
+				Node child = new Node(depth);
 				
+				child.curBoard.copyBoard(curBoard);
+				
+				if(curBoard.checkIfValidChild('o', i, j, child.curBoard) != null)
+				{
+					child.curBoard = curBoard.checkIfValidChild('o', i, j, child.curBoard);
+					child.parent = this;
+					children.add(child);
+					
+				}
 				
 			}
 		}

@@ -69,11 +69,11 @@ public class board {
 	{
 		boolean valid = false;
 		
-		if(theBoard[i][j] == ' ')
-			valid = changesToBoard(piece, i, j);
+		if(childBoard.getSpace(i, j) == ' ')
+			valid = childBoard.changesToBoard(piece, i, j);
 		
-		if(valid)
-		;//TODO sumthing;
+		if(!valid)
+			return null;
 		
 		return childBoard;
 	}
@@ -160,6 +160,19 @@ public class board {
 		}
 		
 		return true;
+	}
+	
+	public void copyBoard(board daddy)
+	{
+		
+		for(int i = 0; i < 8; i++)
+		{
+			for(int j = 0; j < 8; j++)
+			{
+				theBoard[i][j] = daddy.getSpace(i, j);
+			}
+		}
+		
 	}
 	
 	public void printBoard()
