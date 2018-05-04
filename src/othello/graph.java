@@ -148,6 +148,121 @@ public class graph {
 		
 	}
 	
+public int alphaBetaSearchDepthFive() {
+		
+		int i = 0;
+		
+		Node currNode = stack.peek();
+		
+		//depth first search
+		
+		while(stack.size() != 0) {
+			if(currNode.visited == false) {
+				currNode.visited = true;
+				minimaxCount++;
+				if(currNode.pruned == false) {
+					alphaBetaCount++;
+				}
+				
+			}
+			
+			if(currNode.depth == 5) {
+			
+				currNode.calculateHeuristic();
+				//System.out.println(currNode.hVal);
+				stack.pop();
+				
+				//update parent alpha
+				if(currNode.hVal >= currNode.parent.alpha) {
+					currNode.parent.alpha = currNode.hVal;
+					
+				}
+				
+			}	
+			
+			//need to add children nodes to stack
+			else if(currNode.children.size() == 0) {
+				
+				currNode.addChildren();	
+				
+				//TODO here check if size is 0
+				if(currNode.children.size() != 0) {
+					//add first child to stack as long as visited flag false
+					stack.push(currNode.children.get(0));
+				}
+				else {
+					stack.pop();
+				}
+
+				
+			}
+			else {
+				
+				//add children to stack as long as visited flag false
+				for(i=0; i < currNode.children.size(); ++i) {
+					if(currNode.children.get(i).visited == false) {
+						stack.push(currNode.children.get(i));
+						break;
+					}
+				}
+				//if no children with visited flag false,
+				if(i == currNode.children.size()) {
+					stack.pop();
+				}
+				
+				//Need to update min/max values of parent
+				
+				for(i = 0; i < currNode.children.size(); ++i) {
+					
+					if(currNode.depth %2 == 1 && currNode.children.get(i).alpha < currNode.beta && currNode.children.get(i).alpha != 0) {
+						currNode.beta = currNode.children.get(i).alpha;
+					}
+					else if(currNode.depth %2 == 0 && currNode.children.get(i).beta > currNode.alpha && currNode.children.get(i).beta != 100) {
+						currNode.alpha = currNode.children.get(i).beta;
+					}
+				
+				}
+			
+			//alpha beta pruning
+			if(currNode.parent != null ) {
+				if(currNode.depth %2 == 1 && currNode.beta <= currNode.parent.alpha) {
+					alphaBetaPrune(currNode);
+				}
+				else if(currNode.depth %2 == 0 && currNode.alpha >= currNode.parent.beta){
+					alphaBetaPrune(currNode);
+				}
+				//depth 5
+				if(currNode.parent.parent != null ) {
+					if(currNode.parent.parent.parent != null) {
+						
+						if(currNode.depth %2 == 1 && currNode.beta <= currNode.parent.parent.parent.alpha) {
+							alphaBetaPrune(currNode);
+						}
+						else if(currNode.depth %2 == 0 && currNode.alpha >= currNode.parent.parent.parent.beta){
+							alphaBetaPrune(currNode);
+						}
+						
+					}
+				}
+				
+				
+			}
+				
+			}
+			
+			if(stack.empty())
+				break;
+			else
+				currNode = stack.peek();
+					
+		}
+		
+		
+		return 0;
+		
+		
+	}
+	
 	
 	
 	

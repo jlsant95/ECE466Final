@@ -8,15 +8,14 @@ public class othello {
 		
 		//board orig = new board();
 		Node orig = new Node();
-		
-		
+
 //		orig.setSpace('*', 3, 5);
 //		orig.setSpace('*', 0, 0);
 //		orig.setSpace('o', 2, 3);
 //		orig.setSpace('*', 5, 2);
 		
 		//orig.printBoard();
-		orig.curBoard.printBoard();
+		
 		
 		int row;
 		int column;
@@ -24,6 +23,27 @@ public class othello {
 		int i;
 		boolean black = true;
 		boolean white = true;
+		boolean depthFive;
+		long totalMinimaxCount = 0;
+		long totalAlphaBetaCount = 0;
+		
+		System.out.println("Choose Difficulty:");
+		System.out.println("0. Easy (Depth 3)");
+		System.out.println("1. Hard (Depth 5)");
+		Scanner scan = new Scanner(System.in);
+		input = scan.nextLine();
+		
+		
+		if (Character.getNumericValue(input.charAt(0)) == 0) {
+			depthFive = false;
+		}
+		else {
+			depthFive = true;
+		}
+		
+		//scan.close();
+		
+		orig.curBoard.printBoard();
 		
 		while(true) {
 			for(i = 0; i<3; ++i){
@@ -55,16 +75,28 @@ public class othello {
 				System.out.println("Game ended");
 				System.out.println("There are" + orig.countBlack() + "black stones");
 				System.out.println("There are" + orig.countWhite() + "white stones");
+				System.out.println("Total states explored for minimax: " + totalMinimaxCount);
+				System.out.println("Total states explored for alpha-beta pruning: " + totalAlphaBetaCount);
 				break;
 				
 			}
 			
 			
 			graph currGraph = new graph(orig);
-			currGraph.alphaBetaSearch();
 			
-			System.out.println(currGraph.minimaxCount);
-			System.out.println(currGraph.alphaBetaCount);
+			if(!depthFive) {
+				currGraph.alphaBetaSearch();
+			}
+			else {
+				currGraph.alphaBetaSearchDepthFive();
+			}
+
+			
+			System.out.println("States explored for minimax: " + currGraph.minimaxCount);
+			System.out.println("States explored with pruning: " + currGraph.alphaBetaCount);
+			
+			totalMinimaxCount = totalMinimaxCount + currGraph.minimaxCount;
+			totalAlphaBetaCount = totalAlphaBetaCount + currGraph.alphaBetaCount;
 			
 //			System.out.println("Root alpha value: " + orig.alpha);
 //			
@@ -81,6 +113,7 @@ public class othello {
 			}
 			//check if any valid moves for AI
 			if(orig.children.size() == 0) {
+				System.out.println("AI couldn't make a move");
 				white = false;
 			}
 			else {
@@ -89,8 +122,19 @@ public class othello {
 			
 			if(white == false && black == false) {
 				System.out.println("Game ended");
+				if(orig.countBlack() < orig.countWhite()) {
+					System.out.println("YOU LOSE!!");
+				}
+				else if(orig.countBlack() > orig.countWhite()) {
+					System.out.println("YOU WIN!!");
+				}
+				else if(orig.countBlack() == orig.countWhite()) {
+					System.out.println("IT'S A TIE!!");
+				}
 				System.out.println("There are " + orig.countBlack() + " black stones");
 				System.out.println("There are " + orig.countWhite() + " white stones");
+				System.out.println("Total states explored for minimax: " + totalMinimaxCount);
+				System.out.println("Total states explored for alpha-beta pruning: " + totalAlphaBetaCount);
 				break;
 			}
 				
